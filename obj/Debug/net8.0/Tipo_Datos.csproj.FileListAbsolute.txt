@@ -521,3 +521,4 @@ D:\UNIANDES\PROYECTOS APLICACIONES WEB\web\Semana 02\Tipo_Datos\obj\Debug\net8.0
 D:\UNIANDES\PROYECTOS APLICACIONES WEB\web\Semana 02\Tipo_Datos\obj\Debug\net8.0\Tipo_Datos.pdb
 D:\UNIANDES\PROYECTOS APLICACIONES WEB\web\Semana 02\Tipo_Datos\obj\Debug\net8.0\Tipo_Datos.genruntimeconfig.cache
 D:\UNIANDES\PROYECTOS APLICACIONES WEB\web\Semana 02\Tipo_Datos\obj\Debug\net8.0\ref\Tipo_Datos.dll
+D:\UNIANDES\PROYECTOS APLICACIONES WEB\web\Semana 02\Tipo_Datos\obj\Debug\net8.0\Tipo_Datos.sourcelink.json

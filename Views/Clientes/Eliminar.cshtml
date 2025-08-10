@@ -1,0 +1,36 @@
+@model Tipo_Datos.Models.Entidades.ClientesModel
+
+@{
+    ViewData["Title"] = "Eliminar cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-3 text-danger">Eliminar cliente</h1>
+<p>¿Estás seguro de que deseas eliminar este cliente?</p>
+@if (ViewData["MensajeNoEliminable"] != null)
+{
+    <div class="alert alert-warning">@ViewData["MensajeNoEliminable"]</div>
+}
+<hr />
+<div class="mb-3">
+    <strong>@Html.DisplayNameFor(m => m.Nombres):</strong> @Html.DisplayFor(m => m.Nombres)
+</div>
+<div class="mb-3">
+    <strong>@Html.DisplayNameFor(m => m.Email):</strong> @Html.DisplayFor(m => m.Email)
+</div>
+<div class="mb-3">
+    <strong>@Html.DisplayNameFor(m => m.Telefono):</strong> @Html.DisplayFor(m => m.Telefono)
+</div>
+<div class="mb-3">
+    <strong>@Html.DisplayNameFor(m => m.Direccion):</strong> @Html.DisplayFor(m => m.Direccion)
+</div>
+<div class="mb-3">
+    <strong>@Html.DisplayNameFor(m => m.Cedula_RUC):</strong> @Html.DisplayFor(m => m.Cedula_RUC)
+</div>
+
+<form asp-action="Eliminar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger" @(Model.isDelete ? "" : "disabled")>Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+</form>

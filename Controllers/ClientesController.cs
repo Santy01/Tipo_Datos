@@ -34,9 +34,80 @@ namespace Tipo_Datos.Controllers
             }
             return  View(cliente);
         }
+        [HttpGet]
+        public async Task<IActionResult> Editar(int? id)
+        {
+            if (id == null) return NotFound();
 
+            var cliente = await _dbContext.Clientes.FindAsync(id.Value);
+            if (cliente == null) return NotFound();
 
-    }
+            return View(cliente);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(int id)
+        {
+            var cliente = await _dbContext.Clientes.FindAsync(id);
+            if (cliente == null) return NotFound();
+
+            if (await TryUpdateModelAsync<ClientesModel>(
+                    cliente,
+                    "",
+                    c => c.Nombres,
+                    c => c.Email,
+                    c => c.Telefono,
+                    c => c.Direccion,
+                    c => c.Cedula_RUC,
+                    c => c.isDelete))
+            {
+                try
+                {
+                    cliente.Update_At = DateTime.Now;
+                    await _dbContext.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return Problem("Error de concurrencia al actualizar el cliente.");
+                }
+            }
+
+            return View(cliente);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var cliente = await _dbContext.Clientes.FirstOrDefaultAsync(c => c.Id == id.Value);
+            if (cliente == null) return NotFound();
+
+            if (!cliente.isDelete)
+            {
+                ViewData["MensajeNoEliminable"] = "El cliente no es eliminable.";
+            }
+
+            return View(cliente);
+        }
+        [HttpPost, ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarConfirmado(int id)
+        {
+            var cliente = await _dbContext.Clientes.FindAsync(id);
+            if (cliente == null) return NotFound();
+            if (!cliente.isDelete)
+            {
+                ViewData["MensajeNoEliminable"] = "El cliente no es eliminable.";
+                return View("Eliminar", cliente);
+            }
+
+            _dbContext.Clientes.Remove(cliente);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+}
+
 }
 
 
