@@ -1,0 +1,18 @@
+﻿# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+
+# .NET
+bin/
+obj/
+out/
+
+# Logs y bases locales
+*.log
+*.sqlite
+*.db
+
+# Config locales
+appsettings.*.local.json
